@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import { getProducts, addProduct, getProductCategories } from '../services/mockData';
+import { Tag, Plus, X } from 'lucide-react';
 
 // PUBLIC_INTERFACE
 /**
@@ -94,7 +95,7 @@ function Products() {
     }
 
     // Add product using mock data service
-    const newProduct = addProduct(formData);
+    addProduct(formData);
     
     // Update local state
     setProducts(getProducts());
@@ -136,9 +137,10 @@ function Products() {
           />
           <button 
             onClick={() => setShowAddModal(true)}
-            className="bg-primary text-white px-6 py-2 rounded hover:bg-gray-800 transition-colors"
+            className="bg-primary text-white px-6 py-2 rounded hover:bg-gray-800 transition-colors flex items-center"
           >
-            + Add Product
+            <Plus size={18} className="mr-2" />
+            Add Product
           </button>
         </div>
       </Card>
@@ -152,10 +154,10 @@ function Products() {
                 <h2 className="text-2xl font-bold text-primary">Add New Product</h2>
                 <button
                   onClick={handleCloseModal}
-                  className="text-gray-500 hover:text-gray-700 text-2xl"
+                  className="text-gray-500 hover:text-gray-700"
                   aria-label="Close modal"
                 >
-                  ×
+                  <X size={24} />
                 </button>
               </div>
 
@@ -278,8 +280,8 @@ function Products() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredProducts.map((product) => (
           <Card key={product.id} className="flex flex-col">
-            <div className="aspect-square bg-gray-100 rounded mb-4 flex items-center justify-center text-4xl">
-              🏷️
+            <div className="aspect-square bg-gray-100 rounded mb-4 flex items-center justify-center">
+              <Tag size={48} className="text-gray-400" />
             </div>
             <h3 className="font-semibold text-primary mb-2">{product.name}</h3>
             <p className="text-sm text-secondary mb-2">{product.category}</p>

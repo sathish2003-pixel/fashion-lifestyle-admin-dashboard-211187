@@ -1,4 +1,5 @@
 import React from 'react';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 
 // PUBLIC_INTERFACE
 /**
@@ -6,11 +7,11 @@ import React from 'react';
  * @param {Object} props - Component props
  * @param {string} props.title - Stat title
  * @param {string|number} props.value - Stat value
- * @param {string} props.icon - Icon to display
+ * @param {React.ComponentType} props.icon - Icon component from lucide-react
  * @param {number} props.growth - Growth percentage
  * @returns {JSX.Element} StatCard component
  */
-function StatCard({ title, value, icon, growth }) {
+function StatCard({ title, value, icon: IconComponent, growth }) {
   const isPositive = growth >= 0;
 
   return (
@@ -20,12 +21,21 @@ function StatCard({ title, value, icon, growth }) {
           <p className="text-sm text-secondary mb-1">{title}</p>
           <p className="text-2xl font-bold text-primary">{value}</p>
           {growth !== undefined && (
-            <p className={`text-sm mt-2 ${isPositive ? 'text-success' : 'text-error'}`}>
-              {isPositive ? '↑' : '↓'} {Math.abs(growth)}% from last month
+            <p className={`text-sm mt-2 flex items-center ${isPositive ? 'text-success' : 'text-error'}`}>
+              {isPositive ? (
+                <TrendingUp size={16} className="mr-1" />
+              ) : (
+                <TrendingDown size={16} className="mr-1" />
+              )}
+              {Math.abs(growth)}% from last month
             </p>
           )}
         </div>
-        <div className="text-4xl">{icon}</div>
+        {IconComponent && (
+          <div className="text-primary">
+            <IconComponent size={40} strokeWidth={1.5} />
+          </div>
+        )}
       </div>
     </div>
   );

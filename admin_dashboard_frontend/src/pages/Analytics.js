@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import { getAnalyticsData } from '../services/mockData';
+import { TrendingUp, Package, DollarSign } from 'lucide-react';
 
 // PUBLIC_INTERFACE
 /**
@@ -101,7 +102,11 @@ function Analytics() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card>
           <div className="text-center">
-            <div className="text-4xl mb-2">📈</div>
+            <div className="flex justify-center mb-3">
+              <div className="p-3 bg-gray-100 rounded-full">
+                <TrendingUp size={32} className="text-primary" />
+              </div>
+            </div>
             <p className="text-2xl font-bold text-primary">
               {formatCurrency(analyticsData.revenueChart.reduce((sum, d) => sum + d.revenue, 0))}
             </p>
@@ -110,7 +115,11 @@ function Analytics() {
         </Card>
         <Card>
           <div className="text-center">
-            <div className="text-4xl mb-2">📦</div>
+            <div className="flex justify-center mb-3">
+              <div className="p-3 bg-gray-100 rounded-full">
+                <Package size={32} className="text-primary" />
+              </div>
+            </div>
             <p className="text-2xl font-bold text-primary">
               {analyticsData.revenueChart.reduce((sum, d) => sum + d.orders, 0).toLocaleString()}
             </p>
@@ -119,7 +128,11 @@ function Analytics() {
         </Card>
         <Card>
           <div className="text-center">
-            <div className="text-4xl mb-2">💰</div>
+            <div className="flex justify-center mb-3">
+              <div className="p-3 bg-gray-100 rounded-full">
+                <DollarSign size={32} className="text-primary" />
+              </div>
+            </div>
             <p className="text-2xl font-bold text-primary">
               {formatCurrency(
                 analyticsData.revenueChart.reduce((sum, d) => sum + d.revenue, 0) /

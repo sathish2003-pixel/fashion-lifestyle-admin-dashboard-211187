@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import { getProducts, getInventoryAlerts } from '../services/mockData';
+import { Package, AlertTriangle, XCircle } from 'lucide-react';
 
 // PUBLIC_INTERFACE
 /**
@@ -32,7 +33,11 @@ function Inventory() {
     <div className="space-y-6">
       {/* Inventory Alerts */}
       {alerts.length > 0 && (
-        <Card title="⚠️ Inventory Alerts">
+        <Card>
+          <div className="flex items-center mb-4">
+            <AlertTriangle size={20} className="text-yellow-600 mr-2" />
+            <h3 className="text-lg font-semibold text-primary">Inventory Alerts</h3>
+          </div>
           <div className="space-y-3">
             {alerts.map((alert) => (
               <div key={alert.id} className="flex items-center justify-between p-3 bg-yellow-50 border border-yellow-200 rounded">
@@ -93,21 +98,33 @@ function Inventory() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card>
           <div className="text-center">
-            <div className="text-4xl mb-2">📦</div>
+            <div className="flex justify-center mb-3">
+              <div className="p-3 bg-gray-100 rounded-full">
+                <Package size={32} className="text-primary" />
+              </div>
+            </div>
             <p className="text-2xl font-bold text-primary">{products.reduce((sum, p) => sum + p.stock, 0)}</p>
             <p className="text-sm text-secondary mt-1">Total Units in Stock</p>
           </div>
         </Card>
         <Card>
           <div className="text-center">
-            <div className="text-4xl mb-2">⚠️</div>
+            <div className="flex justify-center mb-3">
+              <div className="p-3 bg-yellow-50 rounded-full">
+                <AlertTriangle size={32} className="text-yellow-600" />
+              </div>
+            </div>
             <p className="text-2xl font-bold text-yellow-600">{products.filter(p => p.stock < 25 && p.stock > 0).length}</p>
             <p className="text-sm text-secondary mt-1">Low Stock Items</p>
           </div>
         </Card>
         <Card>
           <div className="text-center">
-            <div className="text-4xl mb-2">❌</div>
+            <div className="flex justify-center mb-3">
+              <div className="p-3 bg-red-50 rounded-full">
+                <XCircle size={32} className="text-error" />
+              </div>
+            </div>
             <p className="text-2xl font-bold text-error">{products.filter(p => p.stock === 0).length}</p>
             <p className="text-sm text-secondary mt-1">Out of Stock Items</p>
           </div>

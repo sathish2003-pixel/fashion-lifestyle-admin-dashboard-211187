@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import StatCard from '../components/StatCard';
 import Card from '../components/Card';
 import { getDashboardStats, getOrders } from '../services/mockData';
+import { DollarSign, Package, Users, Tag, Plus, ClipboardList, Ticket } from 'lucide-react';
 
 // PUBLIC_INTERFACE
 /**
@@ -47,25 +48,25 @@ function Dashboard() {
         <StatCard
           title="Total Revenue"
           value={formatCurrency(stats.totalRevenue)}
-          icon="💰"
+          icon={DollarSign}
           growth={stats.revenueGrowth}
         />
         <StatCard
           title="Total Orders"
           value={stats.totalOrders.toLocaleString()}
-          icon="📦"
+          icon={Package}
           growth={stats.ordersGrowth}
         />
         <StatCard
           title="Total Customers"
           value={stats.totalCustomers.toLocaleString()}
-          icon="👥"
+          icon={Users}
           growth={stats.customersGrowth}
         />
         <StatCard
           title="Total Products"
           value={stats.totalProducts.toLocaleString()}
-          icon="🏷️"
+          icon={Tag}
           growth={stats.productsGrowth}
         />
       </div>
@@ -106,7 +107,11 @@ function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card>
           <div className="text-center">
-            <div className="text-4xl mb-2">➕</div>
+            <div className="flex justify-center mb-3">
+              <div className="p-3 bg-gray-100 rounded-full">
+                <Plus size={32} className="text-primary" />
+              </div>
+            </div>
             <h4 className="font-semibold text-primary mb-2">Add New Product</h4>
             <button className="bg-primary text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors">
               Create Product
@@ -115,7 +120,11 @@ function Dashboard() {
         </Card>
         <Card>
           <div className="text-center">
-            <div className="text-4xl mb-2">📋</div>
+            <div className="flex justify-center mb-3">
+              <div className="p-3 bg-gray-100 rounded-full">
+                <ClipboardList size={32} className="text-primary" />
+              </div>
+            </div>
             <h4 className="font-semibold text-primary mb-2">Manage Orders</h4>
             <button className="bg-primary text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors">
               View All Orders
@@ -124,7 +133,11 @@ function Dashboard() {
         </Card>
         <Card>
           <div className="text-center">
-            <div className="text-4xl mb-2">🎫</div>
+            <div className="flex justify-center mb-3">
+              <div className="p-3 bg-gray-100 rounded-full">
+                <Ticket size={32} className="text-primary" />
+              </div>
+            </div>
             <h4 className="font-semibold text-primary mb-2">Create Discount</h4>
             <button className="bg-primary text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors">
               New Discount

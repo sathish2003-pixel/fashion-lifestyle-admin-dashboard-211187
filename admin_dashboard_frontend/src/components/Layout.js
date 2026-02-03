@@ -1,5 +1,18 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { 
+  LayoutDashboard, 
+  Package, 
+  Tag, 
+  Users, 
+  ClipboardList, 
+  Ticket, 
+  TrendingUp,
+  ChevronLeft,
+  ChevronRight,
+  Bell,
+  User
+} from 'lucide-react';
 
 // PUBLIC_INTERFACE
 /**
@@ -13,13 +26,13 @@ function Layout({ children }) {
   const location = useLocation();
 
   const navItems = [
-    { path: '/', icon: '📊', label: 'Dashboard' },
-    { path: '/orders', icon: '📦', label: 'Orders' },
-    { path: '/products', icon: '🏷️', label: 'Products' },
-    { path: '/customers', icon: '👥', label: 'Customers' },
-    { path: '/inventory', icon: '📋', label: 'Inventory' },
-    { path: '/discounts', icon: '🎫', label: 'Discounts' },
-    { path: '/analytics', icon: '📈', label: 'Analytics' },
+    { path: '/', icon: LayoutDashboard, label: 'Dashboard' },
+    { path: '/orders', icon: Package, label: 'Orders' },
+    { path: '/products', icon: Tag, label: 'Products' },
+    { path: '/customers', icon: Users, label: 'Customers' },
+    { path: '/inventory', icon: ClipboardList, label: 'Inventory' },
+    { path: '/discounts', icon: Ticket, label: 'Discounts' },
+    { path: '/analytics', icon: TrendingUp, label: 'Analytics' },
   ];
 
   const isActive = (path) => {
@@ -45,27 +58,34 @@ function Layout({ children }) {
               className="p-2 hover:bg-gray-700 rounded"
               aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             >
-              {sidebarCollapsed ? '→' : '←'}
+              {sidebarCollapsed ? (
+                <ChevronRight size={20} />
+              ) : (
+                <ChevronLeft size={20} />
+              )}
             </button>
           </div>
         </div>
 
         {/* Navigation */}
         <nav className="flex-1 py-4">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`flex items-center px-4 py-3 hover:bg-gray-700 transition-colors ${
-                isActive(item.path) ? 'bg-gray-700 border-r-4 border-success' : ''
-              }`}
-            >
-              <span className="text-xl">{item.icon}</span>
-              {!sidebarCollapsed && (
-                <span className="ml-3">{item.label}</span>
-              )}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const IconComponent = item.icon;
+            return (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`flex items-center px-4 py-3 hover:bg-gray-700 transition-colors ${
+                  isActive(item.path) ? 'bg-gray-700 border-r-4 border-success' : ''
+                }`}
+              >
+                <IconComponent size={20} />
+                {!sidebarCollapsed && (
+                  <span className="ml-3">{item.label}</span>
+                )}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Footer */}
@@ -88,12 +108,12 @@ function Layout({ children }) {
               {navItems.find(item => item.path === location.pathname)?.label || 'Dashboard'}
             </h2>
             <div className="flex items-center space-x-4">
-              <button className="p-2 hover:bg-gray-100 rounded-full">
-                🔔
+              <button className="p-2 hover:bg-gray-100 rounded-full" aria-label="Notifications">
+                <Bell size={20} className="text-gray-600" />
               </button>
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white">
-                  A
+                  <User size={16} />
                 </div>
                 <span className="text-sm font-medium">Admin User</span>
               </div>

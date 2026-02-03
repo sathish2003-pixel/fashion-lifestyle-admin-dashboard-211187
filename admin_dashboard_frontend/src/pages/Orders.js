@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import { getOrders } from '../services/mockData';
+import { Eye, Edit } from 'lucide-react';
 
 // PUBLIC_INTERFACE
 /**
@@ -87,8 +88,12 @@ function Orders() {
                   </td>
                   <td className="py-3 px-4 text-sm text-right font-medium">{formatCurrency(order.total)}</td>
                   <td className="py-3 px-4 text-center">
-                    <button className="text-primary hover:text-gray-600 mr-2">👁️</button>
-                    <button className="text-primary hover:text-gray-600">✏️</button>
+                    <button className="text-primary hover:text-gray-600 mr-2" aria-label="View order">
+                      <Eye size={18} />
+                    </button>
+                    <button className="text-primary hover:text-gray-600" aria-label="Edit order">
+                      <Edit size={18} />
+                    </button>
                   </td>
                 </tr>
               ))}
