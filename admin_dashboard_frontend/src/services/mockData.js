@@ -257,7 +257,7 @@ export const getEmployeeDepartments = () => {
 // PUBLIC_INTERFACE
 /**
  * Get analytics data for charts
- * @returns {Object} Analytics data including revenue, orders, and traffic
+ * @returns {Object} Analytics data including revenue, orders, traffic, and category breakdown
  */
 export const getAnalyticsData = () => {
   return {
@@ -276,11 +276,18 @@ export const getAnalyticsData = () => {
       { month: 'Dec', revenue: 26800, orders: 302 },
     ],
     topProducts: [
-      { name: 'Classic White T-Shirt', sales: 456, revenue: 13672.44 },
-      { name: 'Slim Fit Jeans', sales: 289, revenue: 23117.11 },
-      { name: 'Leather Jacket', sales: 123, revenue: 30748.77 },
-      { name: 'Designer Handbag', sales: 167, revenue: 50098.33 },
-      { name: 'Sunglasses', sales: 234, revenue: 35097.66 },
+      { name: 'Classic White T-Shirt', sales: 456, revenue: 13672.44, category: 'Tops' },
+      { name: 'Slim Fit Jeans', sales: 289, revenue: 23117.11, category: 'Bottoms' },
+      { name: 'Leather Jacket', sales: 123, revenue: 30748.77, category: 'Outerwear' },
+      { name: 'Designer Handbag', sales: 167, revenue: 50098.33, category: 'Accessories' },
+      { name: 'Sunglasses', sales: 234, revenue: 35097.66, category: 'Accessories' },
+    ],
+    topCategories: [
+      { category: 'Tops', sales: 1245, revenue: 48950.00 },
+      { category: 'Bottoms', sales: 892, revenue: 67340.00 },
+      { category: 'Outerwear', sales: 445, revenue: 89450.00 },
+      { category: 'Accessories', sales: 678, revenue: 78230.00 },
+      { category: 'Footwear', sales: 534, revenue: 56780.00 },
     ],
     trafficSources: [
       { source: 'Direct', visitors: 4521, percentage: 35 },

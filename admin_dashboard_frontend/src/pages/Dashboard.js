@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import StatCard from '../components/StatCard';
 import Card from '../components/Card';
-import { getDashboardStats, getOrders, getInventoryAlerts } from '../services/mockData';
+import LineChart from '../components/LineChart';
+import { getDashboardStats, getOrders, getInventoryAlerts, getAnalyticsData } from '../services/mockData';
 import { 
   DollarSign, 
   Package, 
@@ -25,12 +26,16 @@ function Dashboard() {
   const [stats, setStats] = useState(null);
   const [recentOrders, setRecentOrders] = useState([]);
   const [inventoryAlerts, setInventoryAlerts] = useState([]);
+  const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
     // Load dashboard data
     setStats(getDashboardStats());
     setRecentOrders(getOrders(5));
     setInventoryAlerts(getInventoryAlerts());
+    const analyticsData = getAnalyticsData();
+    // Get last 6 months for dashboard
+    setChartData(analyticsData.revenueChart.slice(-6));
   }, []);
 
   if (!stats) {
@@ -155,6 +160,29 @@ function Dashboard() {
           </Card>
         </div>
       </div>
+
+      {/* Revenue Trend Chart */}
+      {chartData && (
+        <Card title="Revenue & Orders Trend (Last 6 Months)">
+          <LineChart
+            data={chartData}
+            xAxisKey="month"
+            lines={[
+              { dataKey: 'revenue', color: '#111827', name: 'Revenue' },
+              { dataKey: 'orders', color: '#16A34A', name: 'Orders' }
+            ]}
+            formatter={(value, dataKey) => {
+              if (dataKey === 'revenue') {
+                return new Intl.NumberFormat('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                }).format(value);
+              }
+              return value;
+            }}
+          />
+        </Card>
+      )}
 
       {/* Inventory Alerts */}
       {inventoryAlerts.length > 0 && (
