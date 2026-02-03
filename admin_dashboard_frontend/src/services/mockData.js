@@ -1,5 +1,17 @@
 // Mock data service for the admin dashboard
 
+// In-memory products array to simulate database
+let productsData = [
+  { id: 'PRD-001', name: 'Classic White T-Shirt', category: 'Tops', price: 29.99, stock: 145, status: 'active', image: '/assets/product-placeholder.jpg' },
+  { id: 'PRD-002', name: 'Slim Fit Jeans', category: 'Bottoms', price: 79.99, stock: 67, status: 'active', image: '/assets/product-placeholder.jpg' },
+  { id: 'PRD-003', name: 'Leather Jacket', category: 'Outerwear', price: 249.99, stock: 23, status: 'active', image: '/assets/product-placeholder.jpg' },
+  { id: 'PRD-004', name: 'Running Sneakers', category: 'Footwear', price: 119.99, stock: 0, status: 'out-of-stock', image: '/assets/product-placeholder.jpg' },
+  { id: 'PRD-005', name: 'Summer Dress', category: 'Dresses', price: 89.99, stock: 54, status: 'active', image: '/assets/product-placeholder.jpg' },
+  { id: 'PRD-006', name: 'Wool Sweater', category: 'Tops', price: 64.99, stock: 12, status: 'low-stock', image: '/assets/product-placeholder.jpg' },
+  { id: 'PRD-007', name: 'Designer Handbag', category: 'Accessories', price: 299.99, stock: 34, status: 'active', image: '/assets/product-placeholder.jpg' },
+  { id: 'PRD-008', name: 'Sunglasses', category: 'Accessories', price: 149.99, stock: 89, status: 'active', image: '/assets/product-placeholder.jpg' },
+];
+
 // PUBLIC_INTERFACE
 /**
  * Get dashboard statistics
@@ -10,7 +22,7 @@ export const getDashboardStats = () => {
     totalRevenue: 125840.50,
     totalOrders: 1248,
     totalCustomers: 3842,
-    totalProducts: 256,
+    totalProducts: productsData.length,
     revenueGrowth: 12.5,
     ordersGrowth: 8.3,
     customersGrowth: 15.2,
@@ -46,16 +58,53 @@ export const getOrders = (limit = 10) => {
  * @returns {Array} Array of products
  */
 export const getProducts = () => {
-  return [
-    { id: 'PRD-001', name: 'Classic White T-Shirt', category: 'Tops', price: 29.99, stock: 145, status: 'active', image: '/assets/product-placeholder.jpg' },
-    { id: 'PRD-002', name: 'Slim Fit Jeans', category: 'Bottoms', price: 79.99, stock: 67, status: 'active', image: '/assets/product-placeholder.jpg' },
-    { id: 'PRD-003', name: 'Leather Jacket', category: 'Outerwear', price: 249.99, stock: 23, status: 'active', image: '/assets/product-placeholder.jpg' },
-    { id: 'PRD-004', name: 'Running Sneakers', category: 'Footwear', price: 119.99, stock: 0, status: 'out-of-stock', image: '/assets/product-placeholder.jpg' },
-    { id: 'PRD-005', name: 'Summer Dress', category: 'Dresses', price: 89.99, stock: 54, status: 'active', image: '/assets/product-placeholder.jpg' },
-    { id: 'PRD-006', name: 'Wool Sweater', category: 'Tops', price: 64.99, stock: 12, status: 'low-stock', image: '/assets/product-placeholder.jpg' },
-    { id: 'PRD-007', name: 'Designer Handbag', category: 'Accessories', price: 299.99, stock: 34, status: 'active', image: '/assets/product-placeholder.jpg' },
-    { id: 'PRD-008', name: 'Sunglasses', category: 'Accessories', price: 149.99, stock: 89, status: 'active', image: '/assets/product-placeholder.jpg' },
-  ];
+  return [...productsData];
+};
+
+// PUBLIC_INTERFACE
+/**
+ * Add a new product to the catalog
+ * @param {Object} product - Product data including name, category, price, and stock
+ * @returns {Object} The newly created product with generated ID
+ */
+export const addProduct = (product) => {
+  // Generate new product ID
+  const maxId = productsData.reduce((max, p) => {
+    const num = parseInt(p.id.split('-')[1]);
+    return num > max ? num : max;
+  }, 0);
+  
+  const newId = `PRD-${String(maxId + 1).padStart(3, '0')}`;
+  
+  // Determine status based on stock
+  let status = 'active';
+  if (product.stock === 0) {
+    status = 'out-of-stock';
+  } else if (product.stock < 25) {
+    status = 'low-stock';
+  }
+  
+  const newProduct = {
+    id: newId,
+    name: product.name,
+    category: product.category,
+    price: parseFloat(product.price),
+    stock: parseInt(product.stock),
+    status: status,
+    image: '/assets/product-placeholder.jpg'
+  };
+  
+  productsData.push(newProduct);
+  return newProduct;
+};
+
+// PUBLIC_INTERFACE
+/**
+ * Get available product categories
+ * @returns {Array} Array of category names
+ */
+export const getProductCategories = () => {
+  return ['Tops', 'Bottoms', 'Outerwear', 'Footwear', 'Dresses', 'Accessories'];
 };
 
 // PUBLIC_INTERFACE
