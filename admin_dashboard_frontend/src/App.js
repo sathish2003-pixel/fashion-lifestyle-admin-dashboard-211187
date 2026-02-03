@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './contexts/ThemeContext';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Orders from './pages/Orders';
@@ -13,26 +14,28 @@ import Settings from './pages/Settings';
 
 // PUBLIC_INTERFACE
 /**
- * Main application component with routing configuration
+ * Main application component with routing configuration and theme support
  * @returns {JSX.Element} Application root component
  */
 function App() {
   return (
-    <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/customers" element={<Customers />} />
-          <Route path="/inventory" element={<Inventory />} />
-          <Route path="/discounts" element={<Discounts />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/employees" element={<Employees />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/customers" element={<Customers />} />
+            <Route path="/inventory" element={<Inventory />} />
+            <Route path="/discounts" element={<Discounts />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/employees" element={<Employees />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </ThemeProvider>
   );
 }
 
