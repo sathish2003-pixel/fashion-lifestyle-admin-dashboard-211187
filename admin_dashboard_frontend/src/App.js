@@ -9,6 +9,7 @@ import Inventory from './pages/Inventory';
 import Discounts from './pages/Discounts';
 import Analytics from './pages/Analytics';
 import Employees from './pages/Employees';
+import Settings from './pages/Settings';
 
 // PUBLIC_INTERFACE
 /**
@@ -28,6 +29,7 @@ function App() {
           <Route path="/discounts" element={<Discounts />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/employees" element={<Employees />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </Layout>
     </Router>

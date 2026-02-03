@@ -11,9 +11,9 @@ import React from 'react';
  */
 function Card({ children, title, className = '' }) {
   return (
-    <div className={`bg-white rounded-lg shadow p-6 ${className}`}>
+    <div className={`bg-white rounded-lg shadow-sm border border-gray-100 p-6 ${className}`}>
       {title && (
-        <h3 className="text-lg font-semibold text-primary mb-4">{title}</h3>
+        <h3 className="text-lg font-semibold text-primary mb-4 pb-3 border-b border-gray-100">{title}</h3>
       )}
       {children}
     </div>

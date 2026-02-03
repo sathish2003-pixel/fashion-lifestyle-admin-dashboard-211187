@@ -15,13 +15,13 @@ function StatCard({ title, value, icon: IconComponent, growth }) {
   const isPositive = growth >= 0;
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
       <div className="flex items-center justify-between">
         <div className="flex-1">
-          <p className="text-sm text-secondary mb-1">{title}</p>
-          <p className="text-2xl font-bold text-primary">{value}</p>
+          <p className="text-sm text-secondary mb-2 font-medium">{title}</p>
+          <p className="text-2xl font-bold text-primary mb-3">{value}</p>
           {growth !== undefined && (
-            <p className={`text-sm mt-2 flex items-center ${isPositive ? 'text-success' : 'text-error'}`}>
+            <p className={`text-sm flex items-center font-medium ${isPositive ? 'text-success' : 'text-error'}`}>
               {isPositive ? (
                 <TrendingUp size={16} className="mr-1" />
               ) : (
@@ -32,8 +32,8 @@ function StatCard({ title, value, icon: IconComponent, growth }) {
           )}
         </div>
         {IconComponent && (
-          <div className="text-primary">
-            <IconComponent size={40} strokeWidth={1.5} />
+          <div className="bg-gray-50 p-3 rounded-lg">
+            <IconComponent size={32} strokeWidth={1.5} className="text-primary" />
           </div>
         )}
       </div>

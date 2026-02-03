@@ -12,7 +12,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Bell,
-  User
+  User,
+  Settings as SettingsIcon
 } from 'lucide-react';
 
 // PUBLIC_INTERFACE
@@ -35,6 +36,7 @@ function Layout({ children }) {
     { path: '/discounts', icon: Ticket, label: 'Discounts' },
     { path: '/analytics', icon: TrendingUp, label: 'Analytics' },
     { path: '/employees', icon: UserCheck, label: 'Employees' },
+    { path: '/settings', icon: SettingsIcon, label: 'Settings' },
   ];
 
   const isActive = (path) => {
