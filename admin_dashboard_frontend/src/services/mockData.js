@@ -152,6 +152,108 @@ export const getDiscounts = () => {
   ];
 };
 
+// In-memory employees array to simulate database
+let employeesData = [
+  { id: 'EMP-001', name: 'John Anderson', email: 'john.anderson@fashionadmin.com', role: 'Admin', department: 'Management', joinDate: '2022-01-15', status: 'active', phone: '+1-555-0101' },
+  { id: 'EMP-002', name: 'Sarah Johnson', email: 'sarah.johnson@fashionadmin.com', role: 'Manager', department: 'Sales', joinDate: '2022-03-20', status: 'active', phone: '+1-555-0102' },
+  { id: 'EMP-003', name: 'Michael Chen', email: 'michael.chen@fashionadmin.com', role: 'Sales', department: 'Sales', joinDate: '2022-06-10', status: 'active', phone: '+1-555-0103' },
+  { id: 'EMP-004', name: 'Emily Rodriguez', email: 'emily.rodriguez@fashionadmin.com', role: 'Support', department: 'Customer Service', joinDate: '2022-08-05', status: 'active', phone: '+1-555-0104' },
+  { id: 'EMP-005', name: 'David Kim', email: 'david.kim@fashionadmin.com', role: 'Manager', department: 'Operations', joinDate: '2022-09-12', status: 'active', phone: '+1-555-0105' },
+  { id: 'EMP-006', name: 'Lisa Thompson', email: 'lisa.thompson@fashionadmin.com', role: 'Sales', department: 'Sales', joinDate: '2023-01-18', status: 'active', phone: '+1-555-0106' },
+  { id: 'EMP-007', name: 'James Wilson', email: 'james.wilson@fashionadmin.com', role: 'Support', department: 'Customer Service', joinDate: '2023-03-22', status: 'active', phone: '+1-555-0107' },
+  { id: 'EMP-008', name: 'Maria Garcia', email: 'maria.garcia@fashionadmin.com', role: 'Sales', department: 'Sales', joinDate: '2023-05-14', status: 'active', phone: '+1-555-0108' },
+  { id: 'EMP-009', name: 'Robert Lee', email: 'robert.lee@fashionadmin.com', role: 'Manager', department: 'Inventory', joinDate: '2023-07-08', status: 'active', phone: '+1-555-0109' },
+  { id: 'EMP-010', name: 'Jennifer Brown', email: 'jennifer.brown@fashionadmin.com', role: 'Support', department: 'Customer Service', joinDate: '2023-09-25', status: 'active', phone: '+1-555-0110' },
+];
+
+// PUBLIC_INTERFACE
+/**
+ * Get employees list
+ * @returns {Array} Array of employees with their details
+ */
+export const getEmployees = () => {
+  return [...employeesData];
+};
+
+// PUBLIC_INTERFACE
+/**
+ * Add a new employee
+ * @param {Object} employee - Employee data including name, email, role, department, and phone
+ * @returns {Object} The newly created employee with generated ID
+ */
+export const addEmployee = (employee) => {
+  // Generate new employee ID
+  const maxId = employeesData.reduce((max, emp) => {
+    const num = parseInt(emp.id.split('-')[1]);
+    return num > max ? num : max;
+  }, 0);
+  
+  const newId = `EMP-${String(maxId + 1).padStart(3, '0')}`;
+  
+  const newEmployee = {
+    id: newId,
+    name: employee.name,
+    email: employee.email,
+    role: employee.role,
+    department: employee.department,
+    phone: employee.phone,
+    joinDate: new Date().toISOString().split('T')[0],
+    status: 'active'
+  };
+  
+  employeesData.push(newEmployee);
+  return newEmployee;
+};
+
+// PUBLIC_INTERFACE
+/**
+ * Update an existing employee
+ * @param {string} id - Employee ID
+ * @param {Object} updates - Employee data to update
+ * @returns {Object} The updated employee or null if not found
+ */
+export const updateEmployee = (id, updates) => {
+  const index = employeesData.findIndex(emp => emp.id === id);
+  if (index !== -1) {
+    employeesData[index] = { ...employeesData[index], ...updates };
+    return employeesData[index];
+  }
+  return null;
+};
+
+// PUBLIC_INTERFACE
+/**
+ * Delete an employee
+ * @param {string} id - Employee ID
+ * @returns {boolean} True if deleted, false if not found
+ */
+export const deleteEmployee = (id) => {
+  const index = employeesData.findIndex(emp => emp.id === id);
+  if (index !== -1) {
+    employeesData.splice(index, 1);
+    return true;
+  }
+  return false;
+};
+
+// PUBLIC_INTERFACE
+/**
+ * Get available employee roles
+ * @returns {Array} Array of role names
+ */
+export const getEmployeeRoles = () => {
+  return ['Admin', 'Manager', 'Sales', 'Support'];
+};
+
+// PUBLIC_INTERFACE
+/**
+ * Get available departments
+ * @returns {Array} Array of department names
+ */
+export const getEmployeeDepartments = () => {
+  return ['Management', 'Sales', 'Operations', 'Customer Service', 'Inventory', 'Marketing'];
+};
+
 // PUBLIC_INTERFACE
 /**
  * Get analytics data for charts

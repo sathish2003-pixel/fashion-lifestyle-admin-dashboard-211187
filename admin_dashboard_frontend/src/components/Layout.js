@@ -8,6 +8,7 @@ import {
   ClipboardList, 
   Ticket, 
   TrendingUp,
+  UserCheck,
   ChevronLeft,
   ChevronRight,
   Bell,
@@ -33,6 +34,7 @@ function Layout({ children }) {
     { path: '/inventory', icon: ClipboardList, label: 'Inventory' },
     { path: '/discounts', icon: Ticket, label: 'Discounts' },
     { path: '/analytics', icon: TrendingUp, label: 'Analytics' },
+    { path: '/employees', icon: UserCheck, label: 'Employees' },
   ];
 
   const isActive = (path) => {

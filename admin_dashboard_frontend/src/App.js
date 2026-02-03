@@ -8,6 +8,7 @@ import Customers from './pages/Customers';
 import Inventory from './pages/Inventory';
 import Discounts from './pages/Discounts';
 import Analytics from './pages/Analytics';
+import Employees from './pages/Employees';
 
 // PUBLIC_INTERFACE
 /**
@@ -26,6 +27,7 @@ function App() {
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/discounts" element={<Discounts />} />
           <Route path="/analytics" element={<Analytics />} />
+          <Route path="/employees" element={<Employees />} />
         </Routes>
       </Layout>
     </Router>
