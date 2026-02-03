@@ -1,1 +1,3 @@
-# fashion-lifestyle-admin-dashboard-211187
+# Project Repository
+
+This is the initial README file for the project.
